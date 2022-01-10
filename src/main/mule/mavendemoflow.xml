@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b53ef441-60a4-4e1b-b5c8-bc464bbfbe36" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mavendemoflowFlow" doc:id="5eee8f3b-e49d-4840-87b8-d28f58fd3a2a" >
+		<http:listener doc:name="Listener" doc:id="4f013fe4-54a2-4c4c-984a-c7ae3508785e" config-ref="HTTP_Listener_config" path="/mavendemo"/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="70226bc2-6158-4cb5-83ab-f3978c9e1292" />
+		<logger level="INFO" doc:name="Logger" doc:id="548b2242-4d85-4325-9d00-38dd056c2d71" />
+	</flow>
+</mule>
